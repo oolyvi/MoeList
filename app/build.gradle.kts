@@ -79,7 +79,7 @@ android {
         jvmTarget = "1.8"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.11"
+        kotlinCompilerExtensionVersion = "1.5.12"
     }
     packaging {
         resources {
@@ -92,16 +92,16 @@ android {
 dependencies {
 
     //AndroidX
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     implementation("androidx.browser:browser:1.8.0")
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.0")
     implementation("androidx.work:work-runtime:2.9.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     //Compose
-    implementation(platform("androidx.compose:compose-bom:2024.04.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.04.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
@@ -110,7 +110,7 @@ dependencies {
     implementation("androidx.compose.material3:material3-android:$materialVersion")
     implementation("androidx.compose.material3:material3-window-size-class:$materialVersion")
 
-    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.activity:activity-compose:1.9.0")
 
     val lifecycleVersion = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
@@ -141,7 +141,7 @@ dependencies {
     //Utils
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation("org.apache.commons:commons-text:1.11.0")
+    implementation("org.apache.commons:commons-text:1.12.0")
 
     //Image
     val coilVersion = "3.0.0-alpha06"
