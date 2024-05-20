@@ -72,7 +72,11 @@ private fun SettingsViewContent(
                 entriesValues = ThemeStyle.entriesLocalized,
                 value = uiState.theme,
                 icon = R.drawable.ic_round_color_lens_24,
-                onValueChange = { event?.setTheme(it) }
+                onValueChange = { event?.setTheme(it) },
+                showDialog = {
+                    event?.showDialog(it)
+                },
+                uiState = uiState
             )
 
             SwitchPreferenceView(
@@ -86,7 +90,11 @@ private fun SettingsViewContent(
                 entriesValues = AppLanguage.entriesLocalized,
                 value = uiState.language,
                 icon = R.drawable.ic_round_language_24,
-                onValueChange = { event?.setLanguage(it) }
+                onValueChange = { event?.setLanguage(it) },
+                showDialog = {
+                    event?.showDialog(it)
+                },
+                uiState = uiState
             )
 
             ListPreferenceView(
@@ -94,7 +102,13 @@ private fun SettingsViewContent(
                 entriesValues = TitleLanguage.entriesLocalized,
                 value = uiState.titleLanguage,
                 icon = R.drawable.round_title_24,
-                onValueChange = { event?.setTitleLanguage(it) }
+                onValueChange = {
+                    event?.setTitleLanguage(it)
+                                },
+                showDialog = {
+                    event?.showDialog(it)
+                },
+                uiState = uiState
             )
 
             ListPreferenceView(
@@ -102,7 +116,13 @@ private fun SettingsViewContent(
                 entriesValues = StartTab.entriesLocalized,
                 value = uiState.startTab,
                 icon = R.drawable.ic_round_home_24,
-                onValueChange = { event?.setStartTab(it) }
+                onValueChange = {
+                    event?.setStartTab(it)
+                                },
+                showDialog = {
+                    event?.showDialog(it)
+                },
+                uiState = uiState
             )
 
             SwitchPreferenceView(
@@ -117,7 +137,13 @@ private fun SettingsViewContent(
                     entriesValues = ListStyle.entriesLocalized,
                     value = uiState.generalListStyle,
                     icon = R.drawable.round_format_list_bulleted_24,
-                    onValueChange = { event?.setGeneralListStyle(it) }
+                    onValueChange = {
+                        event?.setGeneralListStyle(it)
+                                    },
+                    showDialog = {
+                        event?.showDialog(it)
+                    },
+                    uiState = uiState
                 )
             } else {
                 PlainPreferenceView(
@@ -133,7 +159,13 @@ private fun SettingsViewContent(
                     entriesValues = ItemsPerRow.entriesLocalized,
                     value = uiState.itemsPerRow,
                     icon = R.drawable.round_grid_view_24,
-                    onValueChange = { event?.setItemsPerRow(it) }
+                    onValueChange = {
+                        event?.setItemsPerRow(it)
+                                    },
+                    showDialog = {
+                        event?.showDialog(it)
+                    },
+                    uiState = uiState
                 )
             }
 

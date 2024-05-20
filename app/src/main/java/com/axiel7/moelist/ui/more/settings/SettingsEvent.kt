@@ -21,4 +21,5 @@ interface SettingsEvent : UiEvent {
     fun setUseListTabs(value: Boolean)
     fun setLoadCharacters(value: Boolean)
     fun setRandomListEntryEnabled(value: Boolean)
+    fun showDialog(value: Boolean)
 }

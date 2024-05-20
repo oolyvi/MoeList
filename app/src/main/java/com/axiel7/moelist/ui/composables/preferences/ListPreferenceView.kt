@@ -17,12 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -30,7 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.axiel7.moelist.R
+import com.axiel7.moelist.ui.more.settings.SettingsUiState
 
 @Composable
 fun <T> ListPreferenceView(
@@ -39,14 +34,19 @@ fun <T> ListPreferenceView(
     modifier: Modifier = Modifier,
     value: T,
     @DrawableRes icon: Int? = null,
-    onValueChange: (T) -> Unit
+    onValueChange: (T) -> Unit,
+    showDialog: (Boolean) -> Unit,
+    uiState: SettingsUiState
 ) {
     val configuration = LocalConfiguration.current
-    var openDialog by remember { mutableStateOf(false) }
+
+
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { openDialog = true },
+            .clickable {
+                showDialog(true)
+            },
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -81,9 +81,11 @@ fun <T> ListPreferenceView(
         }
     }
 
-    if (openDialog) {
+    if (uiState.openDialog) {
         AlertDialog(
-            onDismissRequest = { openDialog = false },
+            onDismissRequest = {
+                showDialog(false)
+            },
             title = { Text(text = title) },
             text = {
                 LazyColumn(
@@ -107,16 +109,7 @@ fun <T> ListPreferenceView(
                     }
                 }
             },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        openDialog = false
-                        onValueChange(value)
-                    }
-                ) {
-                    Text(text = stringResource(R.string.ok))
-                }
-            }
+            confirmButton = { }
         )
     }
 }

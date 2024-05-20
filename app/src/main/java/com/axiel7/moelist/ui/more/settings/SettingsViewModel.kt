@@ -99,6 +99,12 @@ class SettingsViewModel(
         }
     }
 
+    override fun showDialog(value: Boolean) {
+        mutableUiState.update {
+            it.copy(openDialog = value)
+        }
+    }
+
     init {
         defaultPreferencesRepository.lang
             .onEach { value ->

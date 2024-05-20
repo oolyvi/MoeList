@@ -93,4 +93,8 @@ class ListStyleSettingsViewModel(
             }
         }
     }
+
+    override fun openDialog(value: Boolean) {
+
+    }
 }

@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.StateFlow
 interface ListStyleSettingsEvent {
     fun getListStyle(mediaType: MediaType, status: ListStatus): StateFlow<ListStyle?>
     fun setListStyle(mediaType: MediaType, status: ListStatus, value: ListStyle)
+    fun openDialog(value: Boolean)
 }

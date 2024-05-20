@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +23,8 @@ import com.axiel7.moelist.ui.base.navigation.NavActionManager
 import com.axiel7.moelist.ui.composables.DefaultScaffoldWithTopAppBar
 import com.axiel7.moelist.ui.composables.preferences.ListPreferenceView
 import com.axiel7.moelist.ui.more.settings.SettingsTitle
+import com.axiel7.moelist.ui.more.settings.SettingsUiState
+import com.axiel7.moelist.ui.more.settings.SettingsViewModel
 import com.axiel7.moelist.ui.theme.MoeListTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -29,18 +32,24 @@ import org.koin.androidx.compose.koinViewModel
 fun ListStyleSettingsView(
     navActionManager: NavActionManager
 ) {
-    val viewModel: ListStyleSettingsViewModel = koinViewModel()
+    val listStyleSettingsViewModel: ListStyleSettingsViewModel = koinViewModel()
+    val settingsViewModel: SettingsViewModel = koinViewModel()
+
+    val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
+
 
     ListStyleSettingsViewContent(
-        event = viewModel,
-        navActionManager = navActionManager
+        event = listStyleSettingsViewModel,
+        navActionManager = navActionManager,
+        uiState = uiState
     )
 }
 
 @Composable
 private fun ListStyleSettingsViewContent(
     event: ListStyleSettingsEvent?,
-    navActionManager: NavActionManager
+    navActionManager: NavActionManager,
+    uiState: SettingsUiState
 ) {
     DefaultScaffoldWithTopAppBar(
         title = stringResource(R.string.list_style),
@@ -69,7 +78,11 @@ private fun ListStyleSettingsViewContent(
                     icon = status.icon,
                     onValueChange = {
                         event?.setListStyle(MediaType.ANIME, status, it)
-                    }
+                    },
+                    showDialog = {
+                        event?.openDialog(it)
+                    },
+                    uiState = uiState
                 )
             }
 
@@ -85,7 +98,11 @@ private fun ListStyleSettingsViewContent(
                     icon = status.icon,
                     onValueChange = {
                         event?.setListStyle(MediaType.MANGA, status, it)
-                    }
+                    },
+                    showDialog = {
+                        event?.openDialog(it)
+                    },
+                    uiState = uiState
                 )
             }
         }
@@ -99,7 +116,8 @@ fun ListStyleSettingsViewPreview() {
         Surface {
             ListStyleSettingsViewContent(
                 event = null,
-                navActionManager = NavActionManager.rememberNavActionManager()
+                navActionManager = NavActionManager.rememberNavActionManager(),
+                uiState = SettingsUiState()
             )
         }
     }
